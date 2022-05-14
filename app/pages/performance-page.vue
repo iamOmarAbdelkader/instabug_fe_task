@@ -1,7 +1,7 @@
 <template>
   <div class="c-dashboard">
     <div class="c-filters__container">
-      [Place filter component here]
+     <filter-chart-data />
     </div>
     <div class="c-dashboard__header">
       <performance-chart-component />
@@ -11,10 +11,21 @@
 
 <script>
 import PerformanceChartComponent from "../components/vue-components/performance-chart.vue";
+import FilterChartData from "../components/vue-components/filter-chart-data.vue";
+import { mapActions } from "vuex";
+import { TYPES } from '../store/modules/team-performane'
+
 export default {
   name: "AboutPageComponent",
+  methods:{
+    ...mapActions({fetchData:TYPES.actions.FETCH_DATA}),
+  },
   components: {
     PerformanceChartComponent,
+    FilterChartData,
+  },
+  created(){
+    this.fetchData();
   },
 };
 </script>

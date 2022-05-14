@@ -5,6 +5,7 @@
     "@uirouter/angularjs": "^1.0.30",
     "@vue/composition-api": "^1.4.4",
     "angular": "^1.8.2",
+    "axios": "^0.27.2",
     "echarts": "^5.2.2",
     "moment": "^2.29.1",
     "ngVue": "^1.7.8",
@@ -14,6 +15,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.16.7",
+    "@babel/plugin-transform-modules-commonjs": "^7.17.9",
     "@babel/preset-env": "^7.8.7",
     "angularjs-template-loader": "^0.1.2",
     "babel-loader": "^8.2.3",
@@ -40,6 +42,7 @@
     "webpack-dev-server": "^4.7.3"
   },
   "scripts": {
-    "start": "webpack-dev-server --open --progress"
+    "start": "webpack-dev-server --open --progress",
+    "test": "jest"
   }
 }
