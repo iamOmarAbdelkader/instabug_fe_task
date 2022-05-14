@@ -1,5 +1,6 @@
 import axios from 'axios';
 
+const BASE_URL = 'https://fe-task.getsandbox.com/performance';
 export const TYPES = {
   getters: {
     DATA: 'DATA',
@@ -26,28 +27,27 @@ const getters = {
 
 const actions = {
   [TYPES.actions.FETCH_DATA]: function ({ commit }) {
-    commit('setLoading', true);
+    commit(TYPES.mutations.SET_LOADING, true);
     axios.get(
-      'https://fe-task.getsandbox.com/performance'
+      BASE_URL
     ).then(function (response) {
-      console.log(response.data, 'res');
-      commit('setData', response.data);
+      commit(TYPES.mutations.SET_DATA, response.data);
     }).catch(function (error) {
-      commit('setErr', error);
+      commit(TYPES.mutations.SET_ERROR, error);
     }).finally(function () {
-      commit('setLoading', false);
+      commit(TYPES.mutations.SET_LOADING, false);
     });
   },
 };
 
 const mutations = {
-  setData: (_state, data) => {
+  [TYPES.mutations.SET_DATA]: (_state, data) => {
     _state.data = data;
   },
-  setLoading: (_state, loading) => {
+  [TYPES.mutations.SET_LOADING]: (_state, loading) => {
     _state.loading = loading;
   },
-  setErr: (_state, error) => {
+  [TYPES.mutations.SET_ERROR]: (_state, error) => {
     _state.error = error;
   },
 };
