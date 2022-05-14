@@ -15,7 +15,7 @@ export default {
   watch:{
     filter:{
       handler(value){
-        
+        this.$emit("filter-change",value);
       }
     }
   },
