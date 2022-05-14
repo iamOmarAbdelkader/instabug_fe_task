@@ -4,12 +4,17 @@ import 'ngVue/build/plugins.js';
 import PerformancePageComponent from './pages/performance-page.vue';
 import PerformanceChartComponent from './components/vue-components/performance-chart.vue';
 import FilterEmployeesComponent from './components/vue-components/filter-employees.vue';
+import store from './store';
 
 angular.module('appModule', [
   'ui.router',
   'ngVue',
   'ngVue.plugins',
-]);
+]).config(($ngVueProvider) => {
+  $ngVueProvider.setRootVueInstanceProps({
+    store: store,
+  });
+});
 
 angular.module('appModule').directive('vPerformancePage', (createVueComponent) => {
   return createVueComponent(Vue.component('performancePageComponent', PerformancePageComponent));
