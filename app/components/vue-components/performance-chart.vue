@@ -16,6 +16,9 @@ import {
   VisualMapComponent,
 } from "echarts/components";
 import VChart from "vue-echarts";
+import { mapGetters } from "vuex";
+import { TYPES } from '../../store/modules/team-performane'
+
 
 use([
   CanvasRenderer,
@@ -32,14 +35,10 @@ export default {
   components: {
     VChart,
   },
-  props:{
-    chartData:Array,
-  },
   data() {
     return {
     };
   },
-
   computed: {
     initOptions() {
       return {
@@ -47,7 +46,7 @@ export default {
         height: "300px",
       };
     },
-
+    ...mapGetters({chartData:TYPES.getters.DATA}),
     chartOptions() {
       return {
         title: {

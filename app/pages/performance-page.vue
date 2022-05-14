@@ -4,7 +4,7 @@
      <filter-chart-data />
     </div>
     <div class="c-dashboard__header">
-      <performance-chart-component :chartData="data"/>
+      <performance-chart-component />
     </div>
   </div>
 </template>
@@ -19,9 +19,6 @@ export default {
   name: "AboutPageComponent",
   methods:{
     ...mapActions({fetchData:TYPES.actions.FETCH_DATA}),
-  },
-  computed:{
-    ...mapGetters({data:TYPES.getters.DATA}),
   },
   components: {
     PerformanceChartComponent,
