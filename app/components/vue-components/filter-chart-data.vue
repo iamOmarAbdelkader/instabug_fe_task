@@ -14,6 +14,8 @@
 </template>
 
 <script>
+import { mapMutations } from 'vuex'
+import { TYPES } from '../../store/modules/team-performane'
 export default {
     data(){
     return {
@@ -34,9 +36,12 @@ export default {
       }
   },
   methods:{
+    ...mapMutations({
+      filterData:TYPES.mutations.FILTER_DATA
+    }),
    handleDatesChange(){
        if(this.from && this.to){
-             // handle vuex state change
+             this.filterData({from: new Date(this.from), to: new Date(this.to)})
        }
    }
   }

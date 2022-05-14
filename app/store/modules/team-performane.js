@@ -1,4 +1,5 @@
 import axios from 'axios';
+import filterChartDataBetweenDates from '../../utils/filterChartDataBetweenDates';
 
 const BASE_URL = 'https://fe-task.getsandbox.com/performance';
 export const TYPES = {
@@ -9,6 +10,7 @@ export const TYPES = {
     SET_LOADING: 'SET_LOADING',
     SET_DATA: 'SET_DATA',
     SET_ERROR: 'SET_ERROR',
+    FILTER_DATA: 'FILTER_DATA',
   },
   actions: {
     FETCH_DATA: 'FETCH_DATA',
@@ -16,6 +18,7 @@ export const TYPES = {
 };
 
 const state = {
+  init_data: [],
   data: [],
   loading: false,
   error: null,
@@ -43,12 +46,18 @@ const actions = {
 const mutations = {
   [TYPES.mutations.SET_DATA]: (_state, data) => {
     _state.data = data;
+    _state.init_data = data;
   },
   [TYPES.mutations.SET_LOADING]: (_state, loading) => {
     _state.loading = loading;
   },
   [TYPES.mutations.SET_ERROR]: (_state, error) => {
     _state.error = error;
+  },
+  [TYPES.mutations.FILTER_DATA]: (_state, { from, to }) => {
+    let res = filterChartDataBetweenDates(from, to, _state.init_data);
+    state.data = res;
+    console.log(TYPES.mutations.FILTER_DATA, from, to, res);
   },
 };
 

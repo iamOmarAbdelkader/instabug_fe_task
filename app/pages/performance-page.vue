@@ -12,7 +12,7 @@
 <script>
 import PerformanceChartComponent from "../components/vue-components/performance-chart.vue";
 import FilterChartData from "../components/vue-components/filter-chart-data.vue";
-import { mapGetters, mapActions } from "vuex";
+import { mapActions } from "vuex";
 import { TYPES } from '../store/modules/team-performane'
 
 export default {
