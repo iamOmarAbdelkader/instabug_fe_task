@@ -67,6 +67,32 @@ export default {
           top: "6px",
           containLabel: true,
         },
+         visualMap: {
+          show: true,
+          dimension: 1,
+          top: 10,
+          right: 10,
+          pieces: [
+            {
+              lte: 50,
+              gte:0,
+              color: 'red',
+              label:"0-50"
+            },
+            {
+              gt: 50,
+              lte: 80,
+              color: 'orange',
+              label:"50-80",
+            },
+            {
+              gt: 80,
+              lte:100,
+              color: 'green',
+              label:"80-100"
+            },
+          ]
+        },
         xAxis: {
           type: "category",
           showGrid: false,
@@ -102,10 +128,12 @@ export default {
     },
 
     xAxisData() {
+      console.log("x",this.chartData.map((item) => this.formatDate(item.date_ms)))
       return this.chartData.map((item) => this.formatDate(item.date_ms));
     },
 
     yAxisData() {
+      console.log("y",this.chartData.map((item) => +item.performance * 100))
       return this.chartData.map((item) => +item.performance * 100);
     },
   },
