@@ -1,0 +1,17 @@
+.c-filter-chart-data{
+    display: flex;
+    justify-content: center;
+    .c-form-group{
+        margin: 4px 8px;
+        &__label{
+            margin-right: 10px;
+        }
+        // &__input{
+
+        // }
+        &--inline{
+            display: inline;
+        }
+
+    }
+}
