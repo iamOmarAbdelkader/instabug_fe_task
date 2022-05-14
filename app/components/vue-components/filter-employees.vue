@@ -33,6 +33,10 @@ export default {
     clear(){
         this.filter = "";
     }
+  },
+  created(){
+    const url = new URL(window.location);
+    this.filter = url.searchParams.get("filter");
   }
 }
 </script>
