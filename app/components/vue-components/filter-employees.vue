@@ -16,10 +16,20 @@ export default {
     filter:{
       handler(value){
         this.$emit("filter-change",value);
+        this.handleUrlUpdate(value);
       }
     }
   },
   methods:{
+    handleUrlUpdate(filter){
+      const url = new URL(window.location);
+      if(filter){
+        url.searchParams.set('filter', filter);
+      } else {
+        url.searchParams.delete('filter')
+      }
+      window.history.pushState(null, '', url.toString());
+    },
     clear(){
         this.filter = "";
     }
