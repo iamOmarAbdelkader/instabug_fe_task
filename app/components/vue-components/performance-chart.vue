@@ -16,6 +16,9 @@ import {
   VisualMapComponent,
 } from "echarts/components";
 import VChart from "vue-echarts";
+import { mapGetters } from "vuex";
+import { TYPES } from '../../store/modules/team-performane'
+
 
 use([
   CanvasRenderer,
@@ -32,42 +35,10 @@ export default {
   components: {
     VChart,
   },
-
   data() {
     return {
-      chartData: [
-        {
-          date_ms: 1641772800000,
-          performance: 0.2,
-        },
-        {
-          date_ms: 1641859200000,
-          performance: 0.33,
-        },
-        {
-          date_ms: 1641945600000,
-          performance: 0.53,
-        },
-        {
-          date_ms: 1642032000000,
-          performance: 0.31,
-        },
-        {
-          date_ms: 1642118400000,
-          performance: 0.65,
-        },
-        {
-          date_ms: 1642204800000,
-          performance: 0.88,
-        },
-        {
-          date_ms: 1642291200000,
-          performance: 0.07,
-        },
-      ],
     };
   },
-
   computed: {
     initOptions() {
       return {
@@ -75,7 +46,7 @@ export default {
         height: "300px",
       };
     },
-
+    ...mapGetters({chartData:TYPES.getters.DATA}),
     chartOptions() {
       return {
         title: {
@@ -83,11 +54,17 @@ export default {
           left: "center",
         },
         tooltip: {
-          trigger: 'axis',
-          transitionDuration: 0,
-          confine: false,
-          hideDelay: 0,
-          padding: 0,
+          borderWidth: 0,
+          backgroundColor: "#15133C",
+          formatter:function(params){
+            return `<div style="text-align:center;color:white">
+              <p>${params.name}</p>
+              <div>
+                ${params.marker}
+                <span style="color:#999">Team Performance index ${params.value} %</span>
+              </div>
+            </div>`
+          }
         },
         grid: {
           left: "30px",
@@ -95,6 +72,32 @@ export default {
           bottom: "2px",
           top: "6px",
           containLabel: true,
+         },
+         visualMap: {
+          show: true,
+          dimension: 1,
+          top: 10,
+          right: 10,
+          pieces: [
+            {
+              lte: 50,
+              gte:0,
+              color: 'red',
+              label:"0-50"
+            },
+            {
+              gt: 50,
+              lte: 80,
+              color: 'orange',
+              label:"50-80",
+            },
+            {
+              gt: 80,
+              lte:100,
+              color: 'green',
+              label:"80-100"
+            },
+          ]
         },
         xAxis: {
           type: "category",

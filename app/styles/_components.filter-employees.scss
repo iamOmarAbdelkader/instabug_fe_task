@@ -1,0 +1,8 @@
+.c-filter-employees {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &__input{
+      margin-right: 10px;
+    }
+  }

@@ -1,17 +1,31 @@
 angular
   .module('appModule')
-  .controller('homeController', homePageController);
+  .controller('homeController', ['Employees', function homePageController(Employees) {
+    const homePageVm = this;
+    homePageVm.employees = [];
+    homePageVm.filter = '';
+    homePageVm.currentPage = 1;
+    homePageVm.shouldBtnBeDisabled = false;
 
-function homePageController(Employees) {
-  const homePageVm = this;
-  homePageVm.employees = [];
+    homePageVm.handleFilterChangeEvent = function (filter) {
+      homePageVm.filter = filter;
+    };
 
-  activate();
+    homePageVm.handleLoadMore = function () {
+      homePageVm.shouldBtnBeDisabled = true;
+      homePageVm.currentPage++;
+      loadEmployees();
+    };
 
-  function activate() {
-    Employees.getEmployees()
-      .then(({ data }) => {
-        homePageVm.employees = homePageVm.employees.concat(data.employees);
-      });
-  }
-}
+    loadEmployees();
+
+    function loadEmployees() {
+      Employees.getEmployees(homePageVm.currentPage)
+        .then(({ data }) => {
+          homePageVm.employees = homePageVm.employees.concat(data.employees);
+          if (data.pages > homePageVm.currentPage) {
+            homePageVm.shouldBtnBeDisabled = false;
+          }
+        });
+    }
+  }]);
