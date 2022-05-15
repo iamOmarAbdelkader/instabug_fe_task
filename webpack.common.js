@@ -5,11 +5,9 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const Dotenv = require('dotenv-webpack');
 
 module.exports = {
-  mode: 'development',
   entry: {
     index: './index.js',
   },
-  devtool: 'inline-source-map',
   plugins: [
     new HtmlWebpackPlugin({
       title: 'Development',
@@ -19,17 +17,13 @@ module.exports = {
     new ESLintPlugin({
       failOnError: true,
       emitWarning: false,
-      outputReport: true
+      outputReport: true,
     }),
     new VueLoaderPlugin(),
     new Dotenv(),
   ],
-  devServer: {
-    static: './dist',
-    hot: true,
-  },
   output: {
-    filename: '[name].bundle.js',
+    filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist'),
     clean: true,
   },
@@ -37,7 +31,7 @@ module.exports = {
     rules: [
       {
         test: /\.vue$/,
-        loader: 'vue-loader'
+        loader: 'vue-loader',
       },
       {
         test: /\.(html)$/,

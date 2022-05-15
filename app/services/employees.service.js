@@ -1,6 +1,4 @@
-angular.module('appModule').service('Employees', EmployeesService);
-
-function EmployeesService($http) {
+angular.module('appModule').service('Employees', ['$http', function EmployeesService($http) {
   const getEmployees = (page = 1) => {
     const employeesUrl = `https://fe-task.getsandbox.com/employees?page=${page}`;
 
@@ -15,4 +13,4 @@ function EmployeesService($http) {
     getEmployees,
     loadMoreEmployees,
   };
-}
+}]);

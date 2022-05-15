@@ -1,34 +1,31 @@
 angular
   .module('appModule')
-  .controller('homeController', homePageController);
+  .controller('homeController', ['Employees', function homePageController(Employees) {
+    const homePageVm = this;
+    homePageVm.employees = [];
+    homePageVm.filter = '';
+    homePageVm.currentPage = 1;
+    homePageVm.shouldBtnBeDisabled = false;
 
-function homePageController(Employees) {
-  const homePageVm = this;
-  homePageVm.employees = [];
-  homePageVm.filter = '';
-  homePageVm.currentPage = 1;
-  homePageVm.shouldBtnBeDisabled = false;
+    homePageVm.handleFilterChangeEvent = function (filter) {
+      homePageVm.filter = filter;
+    };
 
-  homePageVm.handleFilterChangeEvent = function (filter) {
-    console.log(filter);
-    homePageVm.filter = filter;
-  };
+    homePageVm.handleLoadMore = function () {
+      homePageVm.shouldBtnBeDisabled = true;
+      homePageVm.currentPage++;
+      loadEmployees();
+    };
 
-  homePageVm.handleLoadMore = function () {
-    homePageVm.shouldBtnBeDisabled = true;
-    homePageVm.currentPage++;
     loadEmployees();
-  };
 
-  loadEmployees();
-
-  function loadEmployees() {
-    Employees.getEmployees(homePageVm.currentPage)
-      .then(({ data }) => {
-        homePageVm.employees = homePageVm.employees.concat(data.employees);
-        if (data.pages > homePageVm.currentPage) {
-          homePageVm.shouldBtnBeDisabled = false;
-        }
-      });
-  }
-}
+    function loadEmployees() {
+      Employees.getEmployees(homePageVm.currentPage)
+        .then(({ data }) => {
+          homePageVm.employees = homePageVm.employees.concat(data.employees);
+          if (data.pages > homePageVm.currentPage) {
+            homePageVm.shouldBtnBeDisabled = false;
+          }
+        });
+    }
+  }]);

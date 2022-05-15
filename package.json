@@ -43,13 +43,15 @@
     "vue-template-compiler": "^2.6.14",
     "webpack": "^5.66.0",
     "webpack-cli": "^4.9.1",
-    "webpack-dev-server": "^4.7.3"
+    "webpack-dev-server": "^4.7.3",
+    "webpack-merge": "^5.8.0"
   },
   "scripts": {
-    "start": "webpack-dev-server --open --progress",
+    "start": "webpack serve --open --config webpack.dev.js",
+    "build": "webpack --config webpack.prod.js",
     "test": "jest"
   },
   "msw": {
-    "workerDirectory": "\\"
+    "workerDirectory": "dist"
   }
 }
