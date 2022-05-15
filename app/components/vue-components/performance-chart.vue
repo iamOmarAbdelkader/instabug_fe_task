@@ -54,11 +54,18 @@ export default {
           left: "center",
         },
         tooltip: {
-          trigger: 'axis',
-          transitionDuration: 0,
-          confine: false,
-          hideDelay: 0,
-          padding: 0,
+          borderWidth: 0,
+          backgroundColor: "#15133C",
+          formatter:function(params){
+            console.log(params,'params')
+            return `<div style="text-align:center;color:white">
+              <p>${params.name}</p>
+              <div>
+                ${params.marker}
+                <span style="color:#999">Team Performance index ${params.value} %</span>
+              </div>
+            </div>`
+          }
         },
         grid: {
           left: "30px",
@@ -66,6 +73,32 @@ export default {
           bottom: "2px",
           top: "6px",
           containLabel: true,
+         },
+         visualMap: {
+          show: true,
+          dimension: 1,
+          top: 10,
+          right: 10,
+          pieces: [
+            {
+              lte: 50,
+              gte:0,
+              color: 'red',
+              label:"0-50"
+            },
+            {
+              gt: 50,
+              lte: 80,
+              color: 'orange',
+              label:"50-80",
+            },
+            {
+              gt: 80,
+              lte:100,
+              color: 'green',
+              label:"80-100"
+            },
+          ]
         },
         xAxis: {
           type: "category",
@@ -102,10 +135,12 @@ export default {
     },
 
     xAxisData() {
+      console.log("x",this.chartData.map((item) => this.formatDate(item.date_ms)))
       return this.chartData.map((item) => this.formatDate(item.date_ms));
     },
 
     yAxisData() {
+      console.log("y",this.chartData.map((item) => +item.performance * 100))
       return this.chartData.map((item) => +item.performance * 100);
     },
   },
