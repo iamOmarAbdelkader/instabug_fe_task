@@ -11,24 +11,24 @@ angular.module('appModule', [
   'ui.router',
   'ngVue',
   'ngVue.plugins',
-]).config(($ngVueProvider) => {
+]).config(['$ngVueProvider', ($ngVueProvider) => {
   $ngVueProvider.setRootVueInstanceProps({
     store: store,
   });
-});
+}]);
 
-angular.module('appModule').directive('vPerformancePage', (createVueComponent) => {
+angular.module('appModule').directive('vPerformancePage', ['createVueComponent', (createVueComponent) => {
   return createVueComponent(Vue.component('performancePageComponent', PerformancePageComponent));
-});
+}]);
 
-angular.module('appModule').directive('vPerformanceChart', (createVueComponent) => {
+angular.module('appModule').directive('vPerformanceChart', ['createVueComponent', (createVueComponent) => {
   return createVueComponent(Vue.component('performanceChartComponent', PerformanceChartComponent));
-});
+}]);
 
-angular.module('appModule').directive('vFilterEmployees', (createVueComponent) => {
+angular.module('appModule').directive('vFilterEmployees', ['createVueComponent', (createVueComponent) => {
   return createVueComponent(Vue.component('filterEmployeesComponent', FilterEmployeesComponent));
-});
+}]);
 
-angular.module('appModule').directive('vNotFoundPage', (createVueComponent) => {
+angular.module('appModule').directive('vNotFoundPage', ['createVueComponent', (createVueComponent) => {
   return createVueComponent(Vue.component('notFoundPageComponent', NotFoundPage));
-});
+}]);

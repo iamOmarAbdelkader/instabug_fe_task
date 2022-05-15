@@ -57,7 +57,6 @@ export default {
           borderWidth: 0,
           backgroundColor: "#15133C",
           formatter:function(params){
-            console.log(params,'params')
             return `<div style="text-align:center;color:white">
               <p>${params.name}</p>
               <div>
@@ -135,12 +134,10 @@ export default {
     },
 
     xAxisData() {
-      console.log("x",this.chartData.map((item) => this.formatDate(item.date_ms)))
       return this.chartData.map((item) => this.formatDate(item.date_ms));
     },
 
     yAxisData() {
-      console.log("y",this.chartData.map((item) => +item.performance * 100))
       return this.chartData.map((item) => +item.performance * 100);
     },
   },

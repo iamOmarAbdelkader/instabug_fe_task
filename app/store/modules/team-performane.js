@@ -57,7 +57,6 @@ const mutations = {
   [TYPES.mutations.FILTER_DATA]: (_state, { from, to }) => {
     let res = filterChartDataBetweenDates(from, to, _state.init_data);
     state.data = res;
-    console.log(TYPES.mutations.FILTER_DATA, from, to, res);
   },
 };
 
