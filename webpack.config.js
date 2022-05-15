@@ -2,6 +2,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
+const Dotenv = require('dotenv-webpack');
 
 module.exports = {
   mode: 'development',
@@ -21,6 +22,7 @@ module.exports = {
       outputReport: true
     }),
     new VueLoaderPlugin(),
+    new Dotenv(),
   ],
   devServer: {
     static: './dist',

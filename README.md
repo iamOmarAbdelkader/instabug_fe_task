@@ -82,7 +82,9 @@ below are the steps to install the dashboard and a the list of requirements.
   - To handle unknown routes, use [ui-router](https://ui-router.github.io/ng1/), which should redirect to the not found page you just created.
 ---
 #### (BONUS #1) Install cypress and automate one of the following scenarios:
-  - First Scenario
+  - First Scenario (Done)
+    - change .env file IS_TEST_ENV to true
+    - run using yarn start
     - open home page
     - mock the employees request
     - assert employees data is apearing

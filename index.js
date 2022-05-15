@@ -8,3 +8,9 @@ import './app/components/employees-list/employees-list.component';
 
 import './app/pages/home-page/home-page.controller';
 import './app/app.routes.js';
+
+import { worker } from './app/mocks/browser';
+
+if (process.env.IS_TEST_ENV === 'true') {
+  worker.start();
+}
