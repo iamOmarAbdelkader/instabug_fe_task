@@ -6,16 +6,29 @@ function homePageController(Employees) {
   const homePageVm = this;
   homePageVm.employees = [];
   homePageVm.filter = '';
-  this.handleFilterChangeEvent = function (filter) {
+  homePageVm.currentPage = 1;
+  homePageVm.shouldBtnBeDisabled = false;
+
+  homePageVm.handleFilterChangeEvent = function (filter) {
     console.log(filter);
     homePageVm.filter = filter;
   };
-  activate();
 
-  function activate() {
-    Employees.getEmployees()
+  homePageVm.handleLoadMore = function () {
+    homePageVm.shouldBtnBeDisabled = true;
+    homePageVm.currentPage++;
+    loadEmployees();
+  };
+
+  loadEmployees();
+
+  function loadEmployees() {
+    Employees.getEmployees(homePageVm.currentPage)
       .then(({ data }) => {
         homePageVm.employees = homePageVm.employees.concat(data.employees);
+        if (data.pages > homePageVm.currentPage) {
+          homePageVm.shouldBtnBeDisabled = false;
+        }
       });
   }
 }

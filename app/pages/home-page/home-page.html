@@ -6,7 +6,7 @@
   <employees-list filter="homePageVm.filter" employees-list="homePageVm.employees"></employees-list>
 
   <div class="c-dashboard__footer">
-    <button class="c-button">
+    <button  ng-click="homePageVm.handleLoadMore()" class="c-button"  ng-disabled="homePageVm.shouldBtnBeDisabled">
       Load More
     </button>
   </div>
