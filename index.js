@@ -11,4 +11,6 @@ import './app/app.routes.js';
 
 import { worker } from './app/mocks/browser';
 
-if (process.env.IS_TEST_ENV) worker.start();
+if (process.env.IS_TEST_ENV === 'true') {
+  worker.start();
+}
